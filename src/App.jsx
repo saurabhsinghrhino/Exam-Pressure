@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import ResultPage from "./components/ResultPage";
 import ResultAnalysis from "./components/ResultAnalysis";
+import LoginConfirmation from "./components/LoginConfirmation";
 
 const App = () => {
   return (
@@ -62,6 +63,14 @@ const App = () => {
             <ProtectedRoutes>
               <ResultAnalysis />
             </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/confirmation"
+          element={
+            // <ProtectedRoutes>
+            <LoginConfirmation />
+            // </ProtectedRoutes>
           }
         />
       </Routes>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, use } from "react";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 
 // Inner component that safely uses useNavigate
@@ -6,12 +6,23 @@ const UserDetails = () => {
   const navigate = useNavigate();
   const [openProfile, setOpenProfile] = useState(false);
   const dropdownRef = useRef(null);
+  const [data, setdata] = useState(
+    JSON.parse(localStorage.getItem("user")) ||
+      JSON.parse(localStorage.getItem("payload")),
+  );
+  const [userName, setuserName] = useState(
+    data.full_name || data.id.slice(0, 5).toUpperCase(),
+  );
+  const [createdTime, setcreatedTime] = useState(data.created_at);
+  const date = new Date();
+
+  console.log(data);
 
   // 🔐 Mock user data (replace with real auth data later)
   const user = {
-    username: "Saurabh Singh",
-    email: "saurabh@example.com",
-    joined: "12 Jan 2025",
+    username: userName,
+    email: data.email || data.id,
+    joined: date.toLocaleDateString() || createdTime.slice(0, 10),
     supportEmail: "support@exam-pressure.com",
   };
 
@@ -29,7 +40,7 @@ const UserDetails = () => {
     });
 
     // Redirect to login
-    navigate("/login");
+    navigate("/");
   };
 
   // Close dropdown on outside click
@@ -58,7 +69,7 @@ const UserDetails = () => {
             onClick={() => setOpenProfile((prev) => !prev)}
             className="w-10 h-10 rounded-full bg-indigo-500/30 border border-white/20 flex items-center justify-center text-white font-semibold hover:bg-indigo-500/40 transition"
           >
-            SS
+            {user.username.charAt(0).toUpperCase()}
           </button>
 
           {/* User Dropdown */}

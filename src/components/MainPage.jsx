@@ -18,9 +18,9 @@ const MainPage = () => {
 
   const startExam = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
 
-      if (!user) {
+      if (!token) {
         alert("User not logged in");
         navigate("/login");
         return;
@@ -28,15 +28,18 @@ const MainPage = () => {
 
       const res = await axios.post(
         "https://exam-pressure.onrender.com/exams/start",
+        {},
         {
-          userId: user, // ✅ FIXED
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
         },
-        { withCredentials: true },
       );
 
-      // const examId = res.data.examId;
       console.log(res);
 
+      // const examId = res.data.examId;
       // navigate(`/test/${examId}`);
     } catch (err) {
       console.error("Start exam failed:", err);
