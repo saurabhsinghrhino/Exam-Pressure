@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, use } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 
 // Inner component that safely uses useNavigate
