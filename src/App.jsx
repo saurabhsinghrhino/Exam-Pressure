@@ -20,9 +20,9 @@ const App = () => {
           <Route
             path="/main"
             element={
-              // <ProtectedRoutes>
+               <ProtectedRoutes>
               <MainPage />
-              // </ProtectedRoutes>
+               </ProtectedRoutes>
             }
           />
           <Route
